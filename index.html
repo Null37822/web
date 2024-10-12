@@ -27,17 +27,21 @@
         function enviarNotificacion() {
             // Verificar si el navegador soporta las notificaciones
             if ("Notification" in window) {
-                // Pedir permiso si aún no se ha concedido
-                if (Notification.permission === "default") {
+                // Si ya se ha concedido el permiso, muestra la notificación
+                if (Notification.permission === "granted") {
+                    new Notification("Hola");
+                } 
+                // Si no se ha concedido, solicita permiso
+                else if (Notification.permission === "default") {
                     Notification.requestPermission().then(permission => {
                         if (permission === "granted") {
                             new Notification("Hola");
+                        } else {
+                            alert("Permiso de notificaciones no concedido.");
                         }
                     });
-                } else if (Notification.permission === "granted") {
-                    new Notification("Hola");
                 } else {
-                    alert("Las notificaciones están bloqueadas.");
+                    alert("Las notificaciones están bloqueadas. Habilítalas en la configuración del navegador.");
                 }
             } else {
                 alert("Tu navegador no soporta notificaciones.");
