@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificación Push</title>
+    <title>Notificación Local</title>
     <style>
         body {
             display: flex;
@@ -25,11 +25,20 @@
 
     <script>
         function enviarNotificacion() {
-            // Verificar si el navegador soporta notificaciones y si se ha concedido permiso
+            // Verificar si el navegador soporta las notificaciones y si se ha concedido permiso
             if (Notification.permission === "granted") {
                 new Notification("Hola");
+            } else if (Notification.permission === "default") {
+                // Solicitar permiso si aún no se ha concedido
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("Hola");
+                    } else {
+                        alert("No se concedió permiso para las notificaciones.");
+                    }
+                });
             } else {
-                alert("No tienes permiso para recibir notificaciones. Por favor, habilítalo en la configuración del navegador.");
+                alert("Las notificaciones están bloqueadas. Habilítalas en la configuración del navegador.");
             }
         }
 
