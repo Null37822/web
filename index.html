@@ -3,325 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
+    <title>Notificación Push</title>
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Para evitar desplazamiento horizontal */
-        }
-        .welcome {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-size: 4rem;
-            position: relative;
-            text-align: center; /* Centrar el texto horizontalmente */
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        .neon-text {
-            color: red;
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.75), 0 0 10px rgba(255, 0, 0, 0.75), 0 0 20px rgba(255, 0, 0, 0.75);
-            animation: neon 1s infinite alternate;
-        }
-        @keyframes neon {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0.5;
-            }
-        }
-        .fade-out {
-            animation: fadeOut 2s forwards;
-        }
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            top: 0;
-            background-color: black;
-            z-index: 10;
-        }
-        .menu-icon {
-            cursor: pointer;
-        }
-        .menu {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: black;
-            color: red;
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 9;
-            transition: left 0.5s;
-            border-right: 2px solid white; /* Borde blanco */
-        }
-        .menu.open {
-            left: 0;
-        }
-        .menu a {
-            display: block;
-            margin-bottom: 20px;
-            text-decoration: none; /* Quitar subrayado */
-            color: red;
-            font-size: 1.5rem;
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.75), 0 0 10px rgba(255, 0, 0, 0.75), 0 0 20px rgba(255, 0, 0, 0.75);
-            animation: neon 1s infinite alternate;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
-        .search-input {
-            background: black;
-            color: white;
-            border: 1px solid white;
-            padding: 5px;
-            margin-right: 10px;
-        }
-        .search-icon {
-            cursor: pointer;
-        }
-        .content {
-            display: none;
-            width: 80%;
-            max-width: 800px;
-            padding: 20px;
-            box-sizing: border-box;
-            margin: 100px auto 0; /* Centrar el contenido horizontalmente y asegurar que no quede oculto por el header */
-        }
-        .section {
-            margin-bottom: 20px;
-            text-align: center;
-            border: 2px solid white;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .video-container {
-            width: 100%;
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .video-thumbnail {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: none; /* Ocultar el iframe inicialmente */
-        }
-        .edit-link {
-            color: yellow;
-            text-decoration: underline;
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="welcome" id="welcome">
-        <div class="neon-text">Welcome!</div>
-    </div>
-    <div class="header">
-        <div class="menu-icon" id="menuIcon">☰</div>
-        <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Buscar...">
-            <span class="search-icon">🔍</span>
-        </div>
-    </div>
-    <div class="menu" id="menu">
-        <a href="#">.</a>
-        <a href="#" id="scriptsFe">Scripts - FE ✅</a>
-        <a href="#" id="games">Games Scripts</a>
-        <a href="#" id="scriptsnofe">Cliente - FE ❌</a>
-        <a href="#" id="inicio">Home 🔻</a>
-        <a href="https://www.mediafire.com/file/w5tb0vjf4aqzis1/Delta-2.639.688.apk/file" target="_blank">Delta APK latest version</a> <!-- Nueva línea -->
-    </div>
-    <div class="content" id="content">
-        <!-- Secciones dinámicas aquí -->
-    </div>
+    <button onclick="enviarNotificacion()">Push</button>
 
     <script>
-        const sections = [
-            {
-                video: 'https://www.youtube.com/embed/LbjMGLn9HE4',
-                thumbnail: 'https://img.youtube.com/vi/LbjMGLn9HE4/hqdefault.jpg',
-                text: 'Menu Player ',
-                link: 'https://cuty.io/orlngkyd'
-            },
-            {
-                video: 'https://www.youtube.com/embed/wko0Hh9G2L8',
-                thumbnail: 'https://img.youtube.com/vi/wko0Hh9G2L8/hqdefault.jpg',
-                text: 'Fly V3 ',
-                link: 'https://cety.app/NullYT'
-            },
-            {
-                video: 'https://www.youtube.com/embed/_mJSSxEbvNY',
-                thumbnail: 'https://img.youtube.com/vi/_mJSSxEbvNY/hqdefault.jpg',
-                text: 'infinite Yield ',
-                link: 'https://cuty.io/qOktmsW88'
-            },
-            {
-                video: 'https://www.youtube.com/embed/hBgU3B58EV0',
-                thumbnail: 'https://img.youtube.com/vi/hBgU3B58EV0/hqdefault.jpg',
-                text: 'teleport tool ',
-                link: 'https://cuty.io/I3EkTk2W'
-            },
-            {
-                video: 'https://www.youtube.com/embed/67Mo8r9GpYc',
-                thumbnail: 'https://img.youtube.com/vi/67Mo8r9GpYc/hqdefault.jpg',
-                text: 'Aim lock ',
-                link: 'https://cuty.io/KjnhaHsNuy'
-            },
-            {
-                video: 'https://www.youtube.com/embed/LOqymmep66c',
-                thumbnail: 'https://img.youtube.com/vi/LOqymmep66c/hqdefault.jpg',
-                text: 'Car Fly!! ',
-                link: 'https://pastebin.com/ppBVuCDG'
-            },
-            {
-                video: 'https://www.youtube.com/embed/_5eTaYGm5kg',
-                thumbnail: 'https://img.youtube.com/vi/_5eTaYGm5kg/hqdefault.jpg',
-                text: 'telekinesis ',
-                link: 'https://cuty.io/DmA9'
-            },
-            // Agrega más secciones según sea necesario
-        ];
-
-        document.getElementById('menuIcon').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('open');
-        });
-
-        document.getElementById('scriptsFe').addEventListener('click', () => {
-            const unicodeSections = sections.filter(section => section.text.includes(' '));
-            displaySections(unicodeSections);
-        });
-
-        document.getElementById('scriptsnofe').addEventListener('click', () => {
-            const unicodeSections = sections.filter(section => section.text.includes('ㅤ'));
-            displaySections(unicodeSections);
-        });
-
-        document.getElementById('games').addEventListener('click', () => {
-            const unicodeSections = sections.filter(section => section.text.includes(' '));
-            displaySections(unicodeSections);
-        });
-
-        document.getElementById('inicio').addEventListener('click', () => {
-            displaySections(sections);
-        });
-
-        // Mostrar el contenido después de 3 segundos con animación de desaparición
-        setTimeout(() => {
-            const welcome = document.getElementById('welcome');
-            welcome.classList.add('fade-out');
-            setTimeout(() => {
-                welcome.style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-                displaySections(sections);
-            }, 2000); // La duración de la animación de desaparición
-        }, 3000);
-
-        function displaySections(sectionsToDisplay) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = ''; // Clear existing content
-
-            sectionsToDisplay.forEach(section => {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section';
-
-                const videoContainer = document.createElement('div');
-                videoContainer.className = 'video-container';
-                videoContainer.dataset.videoSrc = section.video; // Store video URL in data attribute
-                videoContainer.innerHTML = `
-                    <div class="video-thumbnail" style="background-image: url('${section.thumbnail}');"></div>
-                `;
-
-                const textParagraph = document.createElement('p');
-                textParagraph.innerHTML = `<a href="${section.link}" style="text-decoration: none; color: red;">${section.text}</a>`;
-
-                sectionDiv.appendChild(videoContainer);
-                sectionDiv.appendChild(textParagraph);
-                contentDiv.appendChild(sectionDiv);
-            });
-
-            // Add click event listeners to load videos
-            document.querySelectorAll('.video-container').forEach(container => {
-                container.addEventListener('click', () => {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = container.dataset.videoSrc;
-                    iframe.allowFullscreen = true;
-                    iframe.style.display = 'block'; // Show the iframe
-
-                    container.innerHTML = ''; // Clear thumbnail
-                    container.appendChild(iframe); // Add the iframe to the container
-                });
-            });
-        }
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+        function enviarNotificacion() {
+            // Verificar si el navegador soporta las notificaciones
+            if ("Notification" in window) {
+                // Pedir permiso si aún no se ha concedido
+                if (Notification.permission === "default") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            new Notification("Hola");
+                        }
+                    });
+                } else if (Notification.permission === "granted") {
+                    new Notification("Hola");
+                } else {
+                    alert("Las notificaciones están bloqueadas.");
+                }
+            } else {
+                alert("Tu navegador no soporta notificaciones.");
             }
-            return array;
         }
-
-        document.querySelector('.search-icon').addEventListener('click', () => {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filteredSections = sections.filter(section => section.text.toLowerCase().includes(query));
-            displaySections(filteredSections.length > 0 ? filteredSections : sections);
-        });
-
-        document.getElementById('searchInput').addEventListener('input', () => {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filteredSections = sections.filter(section => section.text.toLowerCase().includes(query));
-            displaySections(filteredSections.length > 0 ? filteredSections : sections);
-        });
-
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const query = document.getElementById('searchInput').value.toLowerCase();
-                const filteredSections = sections.filter(section => section.text.toLowerCase().includes(query));
-                displaySections(filteredSections.length > 0 ? filteredSections : sections);
-            }
-        });
-
-        // Inicializa con secciones aleatorias
-        displaySections(shuffle([...sections]));
     </script>
 </body>
-  </html>
+</html>
