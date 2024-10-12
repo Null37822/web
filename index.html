@@ -1,51 +1,73 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificación Local</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Title</title>
 </head>
 <body>
-    <button onclick="enviarNotificacion()">Push</button>
+<h2>Firebase Web Push Notification Example</h2>
 
-    <script>
-        function enviarNotificacion() {
-            // Verificar si el navegador soporta las notificaciones y si se ha concedido permiso
-            if (Notification.permission === "granted") {
-                new Notification("Hola");
-            } else if (Notification.permission === "default") {
-                // Solicitar permiso si aún no se ha concedido
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification("Hola");
-                    } else {
-                        alert("No se concedió permiso para las notificaciones.");
-                    }
-                });
-            } else {
-                alert("Las notificaciones están bloqueadas. Habilítalas en la configuración del navegador.");
+<p id="token"></p>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_FIREBASE_DOMAIN_NAME",
+        databaseURL: "YOUR_FIREBASE_DATBASE_URL",
+        projectId: "YOUR_FIREBASE_PROJECT_ID",
+        storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET END WITH appspot.com",
+        messagingSenderId: "YOUR SENDER ID",
+        appId: "YOUR APP ID",
+        measurementId: "YOUR MEASUREMENT ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging=firebase.messaging();
+
+    function IntitalizeFireBaseMessaging() {
+        messaging
+            .requestPermission()
+            .then(function () {
+                console.log("Notification Permission");
+                return messaging.getToken();
+            })
+            .then(function (token) {
+                console.log("Token : "+token);
+                document.getElementById("token").innerHTML=token;
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            });
+    }
+
+    messaging.onMessage(function (payload) {
+        console.log(payload);
+        const notificationOption={
+            body:payload.notification.body,
+            icon:payload.notification.icon
+        };
+
+        if(Notification.permission==="granted"){
+            var notification=new Notification(payload.notification.title,notificationOption);
+
+            notification.onclick=function (ev) {
+                ev.preventDefault();
+                window.open(payload.notification.click_action,'_blank');
+                notification.close();
             }
         }
 
-        // Solicitar permiso al cargar la página si aún no se ha concedido ni denegado
-        if (Notification.permission === "default") {
-            Notification.requestPermission();
-        }
-    </script>
+    });
+    messaging.onTokenRefresh(function () {
+        messaging.getToken()
+            .then(function (newtoken) {
+                console.log("New Token : "+ newtoken);
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            })
+    })
+    IntitalizeFireBaseMessaging();
+</script>
 </body>
 </html>
