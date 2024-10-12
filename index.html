@@ -25,27 +25,17 @@
 
     <script>
         function enviarNotificacion() {
-            // Verificar si el navegador soporta las notificaciones
-            if ("Notification" in window) {
-                // Si ya se ha concedido el permiso, muestra la notificación
-                if (Notification.permission === "granted") {
-                    new Notification("Hola");
-                } 
-                // Si no se ha concedido, solicita permiso
-                else if (Notification.permission === "default") {
-                    Notification.requestPermission().then(permission => {
-                        if (permission === "granted") {
-                            new Notification("Hola");
-                        } else {
-                            alert("Permiso de notificaciones no concedido.");
-                        }
-                    });
-                } else {
-                    alert("Las notificaciones están bloqueadas. Habilítalas en la configuración del navegador.");
-                }
+            // Verificar si el navegador soporta notificaciones y si se ha concedido permiso
+            if (Notification.permission === "granted") {
+                new Notification("Hola");
             } else {
-                alert("Tu navegador no soporta notificaciones.");
+                alert("No tienes permiso para recibir notificaciones. Por favor, habilítalo en la configuración del navegador.");
             }
+        }
+
+        // Solicitar permiso al cargar la página si aún no se ha concedido ni denegado
+        if (Notification.permission === "default") {
+            Notification.requestPermission();
         }
     </script>
 </body>
