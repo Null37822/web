@@ -1,41 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificación Push</title>
-    
-    <!-- PushAlert -->
-    <script type="text/javascript">
-        (function(d, t) {
-            var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-            g.src = "https://cdn.pushalert.co/integrate_4bd5861e2019e243c364f578f0c3f2d2.js";
-            s.parentNode.insertBefore(g, s);
-        }(document, "script"));
-    </script>
-    <!-- End PushAlert -->
-</head>
-<body>
-    <button id="notify-btn">Push</button>
+[26/10, 1:47 p. m.] ࿈: Unidades que no mueren con un hechizo
+Carta	Puntos de Vida	Carta	Puntos de Vida
+Reclutas Reales	547	Príncipe oscuro	1200
+Ballesta	1600	Globo bombástico	1680
+Montapuercos	1696	Sanadora	1717
+Torre Infernal	1749	Caballero	1766
+Montacarneros	1767	Caballero Dorado	1800
+Valquiria	1908	Príncipe	1920
+Monje	2000	Lanzarrocas	2080
+Gran Minero	2250	Rey Esqueleto	2300
+Goblin Machine	2305	Gigante Noble	3164
+Duende Gigante	3336	Sabueso de lava	3581
+Esqueleto gigante	3616	P.E.K.K.A	3760
+Gigante Eléctrico	3856	Megacaballero	3993
+Gigante	4091	Golem	5120
+[26/10, 1:48 p. m.] ࿈: Por Puntos de Vida
+Las cartas con PV más bajo no se repiten para hechizos de gran daño cuando no es necesario. Todos los números en esta página se expresan en el formato de entorno justo (nivel 11).
 
-    <script>
-        document.getElementById('notify-btn').addEventListener('click', function() {
-            // Verificar si el navegador es compatible con las notificaciones
-            if (!("Notification" in window)) {
-                alert("Este navegador no soporta notificaciones de escritorio.");
-            } else if (Notification.permission === "granted") {
-                // Si los permisos ya han sido dados, muestra una notificación
-                new Notification("Hola");
-            } else if (Notification.permission !== "denied" || Notification.permission === "default") {
-                // De lo contrario, solicita permisos
-                Notification.requestPermission().then(function (permission) {
-                    if (permission === "granted") {
-                        new Notification("Hola");
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+Muere a Hielo 115 de daño
+Carta	Puntos de Vida	Intercambio de Elixir
+Suspicious Bush	80	-2
+Esqueletos	81	-3
+Murciélagos	81	-2
+Ejército de esqueletos	81	-1
+Muere a Tornado 169 de daño
+Carta	Puntos de Vida	Intercambio de Elixir
+Suspicious Bush	80	-1
+Esqueletos	81	-2
+Murciélagos	81	-1
+Ejército de esqueletos	81	
+Duendes con lanza	133	-1
+Muere a Furia Descarga Bola de nieve gigante 192 de daño
+Suspicious Bush	80	
+Esqueletos	81	-1
+Murciélagos	81	
+Ejército de esqueletos	81	1
+Duendes con lanza	133	
+Muere a  241 de daño
+Muere a El Tronco 290 de daño
+Muere a Flechas 366 de daño
+Duendes	202	-1
+Espíritu Eléctrico	230	-2
+Espíritu de Fuego	230	-2
+Espíritu de hielo	230	-2
+Esbirros	230	
+Horda de esbirros	230	2
+Espíritu Sanador	231	-2
+Duende lanzadardos	260	
+Princesa	261	
+Arqueras	304	
+Lanzafuegos	304	
+Rompemuros	331	-1
+Bombardero	332
+Muere a Bola de fuego 689 de daño
+Carta	Puntos de Vida	Intercambio de Elixir
+Lápida	530	-1
+Electrocutadores	530	
+Arquero Mágico	531	
+Barril de Esqueletos	532	-1
+Bruja Madre	532	
+Dragones Esqueléticos	560	
+Máquina Voladora	614	
+Bárbaros	670	1
+Mago de hielo	688	-1
+Muere a Veneno 728 de daño
+Asumido que la unidad se queda en el veneno durante todo el tiempo.
+Guardias	81	-1
+Ejército de esqueletos	81	-1
+Principito	700	-1
+Mago eléctrico	713	
+Mosquetera	720	
+Trío de Mosqueteras	720	5
+Muere a Rayo 1056 de daño
+Principito	700	-3
+Mago eléctrico	713	-2
+Mosquetera	720	-2
+Trío de Mosqueteras	720	3
+Mago	754	-1
+Duende Forzudo	780	-2
+Cañón	824	-3
+Megaesbirro	837	-3
+Bruja	838	-1
+Horno	848	-2
+Choza de Duendes	848	-1
+Pescador	871	-3
+Cazador	884	-2
+Cañón con Ruedas	892	-1
+Bandida	907	-3
+Bruja nocturna	907	-2
+Dragón Eléctrico	950	-1
+Ariete de batalla	966	-2
+Reina Arquera	1000	-1
+Fénix	1052	-2
+Muere a Cohete 1484 de daño
+Cerdos Reales	837	-1
+Recolector de elixir	1070	
+Torre Tesla	1152	-2
+Bebé Dragón	1152	-2
+Choza de bárbaros	1166	
+Golem de hielo	1197	-4
+Minero	1210	-3
+Fantasma Real	1210	-3
+Verdugo	1280	-1
+Leñador	1282	-2
+Dragón Infernal	1294	-2
+Goblin Demolisher	1301	-2
+Bárbaros de élite	1341	
+Torre bombardera	1356	-2
+Mini P.E.K.K.A	1361	-2
+Mortero	1369	-2
+Excavadora de Duendes	1440	-2
+Golem de Elixir	1441	-3
+Chispitas	1452
