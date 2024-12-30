@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medidor de Ancho de Texto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        #output {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #textInput {
+            font-size: 24px;
+            padding: 5px;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="output">Ancho: 0</div>
+        <input id="textInput" type="text" maxlength="1" placeholder="Ingresa un carácter">
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const textInput = document.getElementById('textInput');
+        const measureText = document.createElement('span');
+
+        // Crear un span invisible para medir
+        measureText.style.position = 'absolute';
+        measureText.style.visibility = 'hidden';
+        measureText.style.whiteSpace = 'nowrap';
+        document.body.appendChild(measureText);
+
+        textInput.addEventListener('input', () => {
+            const text = textInput.value;
+            measureText.textContent = text;
+            measureText.style.fontSize = window.getComputedStyle(textInput).fontSize;
+            measureText.style.fontFamily = window.getComputedStyle(textInput).fontFamily;
+
+            const width = measureText.offsetWidth;
+            output.textContent = `Ancho: ${width}`;
+        });
+    </script>
+</body>
+</html>
