@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Navegación</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        .navigation button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: inline-block; /* Mostrar los botones en línea */
+        }
+        .navigation button:hover {
+            background-color: gray;
+        }
+        #content, .navigation {
+            display: none;
+        }
+        .heart-rain {
+            position: fixed;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            font-size: 1.5em;
+            animation: heart-fall linear infinite;
+        }
+        @keyframes heart-fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="play-button" onclick="playVideo()" style="border-radius: 50%; background-color: red; color: white; border: 2px solid black; padding: 10px 20px; font-size: 1.5em; cursor: pointer;">Tocar</button>
+    <div id="content">Hola</div>
+    <div class="navigation">
+        <button onclick="navigate('back')" id="backButton">←</button>
+        <button onclick="navigate('forward')" id="forwardButton">→</button>
+    </div>
+    
+    <!-- Animación de lluvia de corazones -->
+    <div class="heart-rain" id="heartRain"></div>
+    
+    <!-- API de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let contentIndex = 0; // Variable para controlar el índice del contenido
+
+        const contents = [
+            'Hola',
+            '¿Cómo estás?',
+            '!! Feliz aniversario !!',
+            'Este es nuestro primer año juntos :D',
+            'Estoy muy feliz de estar contigo y tener nuestro primer año como novios, pasamos por muchas cosas pero hoy en día seguimos nosotros aquí, amándonos y mostrando todo el amor que se le tiene al otro',
+            'Quiero que sepas que te amo muchísimo Luz, prometo que siempre vas a estar adelante en todo, siempre con vos, y tendremos un bello futuro juntos. Y lo digo de verdad, que siempre voy a estar a tu lado para ti en todo momento.',
+            'Quiero casarme contigo y tener una casa y una familia contigo, quiero protegerte a ti y a nuestra futura familia si es lo que deseas... Eso... Formar una familia será muy complicado pero no voy a dejar que nada me detenga, Luz.',
+            'Quiero que sepas que mi amor por ti crece cada día más. Sos mi inspiración en todo y no puedo imaginar un futuro sin ti. Estoy emocionado por lo que nos depara el destino juntos y quiero compartir cada momento contigo.',
+            'Te amo',
+            'Te amo'
+        ];
+
+        function navigate(direction) {
+            const content = document.getElementById('content');
+            
+            if (direction === 'forward') {
+                contentIndex++;
+                if (contentIndex >= contents.length) {
+                    contentIndex = contents.length - 1; // Evitar desbordamiento
+                }
+            } else if (direction === 'back') {
+                contentIndex--;
+                if (contentIndex < 0) {
+                    contentIndex = 0; // Evitar índice negativo
+                }
+            }
+
+            content.textContent = contents[contentIndex];
+
+            // Mostrar u ocultar botones de navegación
+            const backButton = document.getElementById('backButton');
+            const forwardButton = document.getElementById('forwardButton');
+            if (contentIndex === 0) {
+                backButton.style.display = 'none';
+                forwardButton.style.display = 'inline-block';
+            } else if (contentIndex === contents.length - 1 || contentIndex === 8) {
+                backButton.style.display = 'none';
+                forwardButton.style.display = 'none';
+            } else {
+                backButton.style.display = 'inline-block';
+                forwardButton.style.display = 'inline-block';
+            }
+
+            // Mostrar la pregunta después de 8 segundos en el contenido 9
+            if (contentIndex === 8) {
+                setTimeout(function() {
+                    content.textContent = '¿Cuánto amas a Joel?';
+
+                    const inputContainer = document.createElement('div');
+                    inputContainer.innerHTML = '<input type="number" id="loveLevel" placeholder="Ingresa un número"><button onclick="sendLove()">Enviar</button>';
+                    content.appendChild(inputContainer);
+
+                    // Ocultar los botones de navegación
+                    backButton.style.display = 'none';
+                    forwardButton.style.display = 'none';
+                }, 8000); // 8000 milisegundos = 8 segundos
+            }
+        }
+
+        function sendLove() {
+            const loveLevel = document.getElementById('loveLevel').value;
+            createHearts(loveLevel);
+        }
+
+        function createHearts(numHearts) {
+            const heartRain = document.getElementById('heartRain');
+            heartRain.innerHTML = ''; // Limpiar corazones anteriores
+
+            // Mostrar hasta 20 corazones como máximo
+            const numHeartsToShow = Math.min(numHearts, 20);
+
+            for (let i = 0; i < numHeartsToShow; i++) {
+                const heart = document.createElement('span');
+                heart.classList.add('heart');
+                heart.textContent = (i % 2 === 0) ? '❤️' : '♥️'; // Alternar entre corazones rojo y corazón rosa
+                heart.style.left = `${Math.random() * 100}vw`; // Posición horizontal aleatoria
+                heart.style.animationDuration = `${Math.random() * 4 + 3}s`; // Duración de la animación entre 3 y 7 segundos
+                heartRain.appendChild(heart);
+            }
+        }
+
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function playVideo() {
+            const playerDiv = document.createElement('div');
+            playerDiv.id = 'youtube-player';
+            document.body.appendChild(playerDiv);
+
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: 'l1WlHRukTUg', // Nuevo enlace de YouTube
+                events: {
+                    'onReady': (event) => event.target.playVideo(),
+                    'onStateChange': onPlayerStateChange
+                },
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'l1WlHRukTUg' // Idéntico al videoId para música
+                }
+            });
+
+            document.getElementById('play-button').style.display = 'none';
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                document.getElementById('content').style.display = 'block';
+                document.querySelector('.navigation').style.display = 'flex';
+            }
+        }
+
+        // Inyectar el script de la API de YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
+</body>
+</html>
