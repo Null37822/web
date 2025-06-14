@@ -1,116 +1,521 @@
-<!DOCTYPE html>  
-<html lang="es">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>    𝕵𝖔𝖊𝖑    </title>  
-    <style>  
-        /* Fondo oscuro */  
-        body {  
-            margin: 0;  
-            padding: 0;  
-            overflow: hidden;  
-            background: black;  
-            font-family: 'Arial', sans-serif;  
-        }  
 
-        /* Contenedor del canvas */  
-        canvas {  
-            position: absolute;  
-            top: 0;  
-            left: 0;  
-            width: 100vw;  
-            height: 100vh;  
-            z-index: -1;  
-        }  
-
-        /* Contenedor del texto centrado */  
-        .center-text {  
-            position: absolute;  
-            top: 50%;  
-            left: 50%;  
-            transform: translate(-50%, -50%);  
-            text-align: center;  
-        }  
-
-        /* Estilo del texto con efecto de borde rojo */  
-        .big-text {  
-            font-size: 100px;  
-            color: white; /* Texto en blanco */  
-            font-weight: bold;  
-            text-shadow: 0 0 5px #800000, 0 0 10px #800000, 0 0 15px #800000;  
-            animation: glow 6s infinite alternate ease-in-out;  
-        }  
-
-        /* Animación del borde rojo neón lento y suave */  
-        @keyframes glow {  
-            0% { text-shadow: 0 0 5px #800000, 0 0 10px #800000, 0 0 15px #800000; }  
-            100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; }  
-        }  
-    </style>  
-</head>  
-<body>  
-    <canvas id="starsCanvas"></canvas> <!-- Fondo de estrellas -->  
-    <div class="center-text">  
-        <div class="big-text">𝕵𝖔𝖊𝖑</div>  
-    </div>  
-
-    <script>  
-        // Fondo de estrellas  
-        const canvas = document.getElementById("starsCanvas");  
-        const ctx = canvas.getContext("2d");  
-
-        function resizeCanvas() {  
-            canvas.width = window.innerWidth;  
-            canvas.height = window.innerHeight;  
-        }  
-
-        resizeCanvas();  
-        window.onresize = resizeCanvas;  
-
-        let stars = [];  
-        const numStars = 100;  
-
-        class Star {  
-            constructor() {  
-                this.x = Math.random() * canvas.width;  
-                this.y = Math.random() * canvas.height;  
-                this.size = Math.random() * 1;  
-                this.speed = Math.random() * 0.5 + 0.2;  
-            }  
-
-            move() {  
-                this.y += this.speed;  
-                if (this.y > canvas.height) this.y = 0;  
-            }  
-
-            draw() {  
-                ctx.fillStyle = "white";  
-                ctx.beginPath();  
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);  
-                ctx.fill();  
-            }  
-        }  
-
-        function initStars() {  
-            stars = [];  
-            for (let i = 0; i < numStars; i++) {  
-                stars.push(new Star());  
-            }  
-        }  
-
-        function animateStars() {  
-            ctx.clearRect(0, 0, canvas.width, canvas.height);  
-            for (let star of stars) {  
-                star.move();  
-                star.draw();  
-            }  
-            requestAnimationFrame(animateStars);  
-        }  
-
-        initStars();  
-        animateStars();  
-    </script>  
-
-</body>  
-</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugadores con Rol "--"</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .contenedor {
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 3px solid red;
+            padding: 15px;
+            width: 100%;
+        }
+        .fila {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid white;
+            padding: 20px 10px;
+            font-size: 20px;
+        }
+        .columna {
+            flex: 1;
+            padding: 0 15px;
+        }
+        .boton-app {
+            background-color: transparent;
+            border: 3px solid red;
+            border-radius: 50%;
+            padding: 10px 14px;
+            color: red;
+            text-decoration: none;
+            font-size: 24px;
+        }
+        .boton-app:hover {
+            background-color: red;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Jugadores con Rol "--"</h2>
+    <div class="contenedor">
+        
+    <div class="fila">
+        <div class="columna nombre">facuu</div>
+        <div class="columna puntos">1700 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=QGVQQJCCP" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">tobi200</div>
+        <div class="columna puntos">1550 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=J2G9RP98G" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">enzo 2.0</div>
+        <div class="columna puntos">1400 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2JRLC2CVL" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">igna</div>
+        <div class="columna puntos">1400 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=8PLRJCP" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">kevin</div>
+        <div class="columna puntos">1350 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=CRLG828CL" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">diiego</div>
+        <div class="columna puntos">1300 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=82RJ28U" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">joiker</div>
+        <div class="columna puntos">1300 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=VCJ889P2L" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">cindy l♡</div>
+        <div class="columna puntos">1250 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=LR0VPG8CG" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">lauffeit</div>
+        <div class="columna puntos">1200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=JLGV8VP8P" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">matute10</div>
+        <div class="columna puntos">1200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=29JC9CGPV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">bounty: $100b</div>
+        <div class="columna puntos">1200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2RLJ2YQLY" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">lachispaesuna49</div>
+        <div class="columna puntos">1200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=R2G0L98J8" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">k1ng</div>
+        <div class="columna puntos">1150 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=YVPQG8VJG" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">tongas</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=YCUUR2Y8" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">~ale~</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=J29GGCRY" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">matias_gomezz5</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=UG08PVPCV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">_dozer_</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=CY0VLVQ8Y" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">deep ember</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=VP99J8L29" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">yamil_yt°_°</div>
+        <div class="columna puntos">1050 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2JCV0PLQL" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">lucas533</div>
+        <div class="columna puntos">1050 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=PP8PVUVUQ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">《☆dąňıęl☆》¥t</div>
+        <div class="columna puntos">900 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=L9JQR2GU8" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">felicarp</div>
+        <div class="columna puntos">800 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 8 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=UVJYP2J9R" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">salu d</div>
+        <div class="columna puntos">1100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 7 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2LGUQJY9Y" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">maanulema21</div>
+        <div class="columna puntos">1050 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 7 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=8GCRJ8RJR" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">bruno</div>
+        <div class="columna puntos">800 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 7 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=CU090UPV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">[đø₦ ₱ɇⱡł₲ɽø]</div>
+        <div class="columna puntos">1000 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 6 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=UQ8YRYUQ2" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">lary</div>
+        <div class="columna puntos">800 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 5 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=C2UQLQ092" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">xleo_2007</div>
+        <div class="columna puntos">650 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 5 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2YV9VQCG0" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">totex</div>
+        <div class="columna puntos">800 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=200PVVLUGV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">eren</div>
+        <div class="columna puntos">700 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=8VYP80QYQ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">aphelion</div>
+        <div class="columna puntos">700 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=U2902200V" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">juan¯\_(ツ)_/¯</div>
+        <div class="columna puntos">650 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=GG9088PV0" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">ytfjcdc</div>
+        <div class="columna puntos">600 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=82LV2V920" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">er1ck</div>
+        <div class="columna puntos">600 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=CQJJVL8VQ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">mohamed sam</div>
+        <div class="columna puntos">500 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 4 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=9JYGY0UQP" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">cheto balboa !</div>
+        <div class="columna puntos">200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 2 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=YGLP02YJ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">baurc</div>
+        <div class="columna puntos">200 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 2 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=JRCVV9RUV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">★彡mj❤️ramirez彡★</div>
+        <div class="columna puntos">100 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 1 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=PPGUY0LUJ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">devil may cry</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=GVUUCYGC0" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">the súper jefe</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=U22QPPCC8" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">ainoha emily</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=UGGJYVC9U" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">el legendario</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=U9QG29UQ8" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">lord ramos</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=L209Y8RG" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">luchoo</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2Y2GU0RUJ" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">jspols</div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=2P9VQ8CV" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">< lautyss ></div>
+        <div class="columna puntos">0 🏅</div>
+        <div class="columna mazos">Hoy: 0 🃏 | Total: 0 🃏</div>
+        <div class="columna ataques">0 ⚓</div>
+        <div class="columna boton">
+            <a href="clashroyale://playerInfo?id=UGQV0U0J" target="_blank" class="boton-app">🔗</a>
+        </div>
+    </div>
+    
+    <div class="fila">
+        <div class="columna nombre">sio</div>
+        <di
