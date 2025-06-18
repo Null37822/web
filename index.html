@@ -2,132 +2,125 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Servicios con Consecuencias</title>
+  <title>Servicios con consecuencias</title>
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: monospace;
-    }
-
-    body, html {
-      height: 100%;
-      background: black;
+      background-color: black;
       color: red;
       overflow-x: hidden;
     }
-
-    #youtube-bg {
+    #yt-bg {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
     }
-
     header, footer {
-      background: black;
-      padding: 20px;
-      border-top: 3px solid red;
-      border-bottom: 3px solid red;
+      background-color: black;
+      border-top: 4px solid red;
+      border-bottom: 4px solid red;
+      padding: 1em;
       text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      text-shadow: 0 0 4px red;
+      font-size: 1.5em;
     }
-
     .section {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 40px;
-      border-bottom: 2px solid red;
-      background-color: rgba(0,0,0,0.75);
+      margin: 2em;
+      border: 2px solid red;
+      padding: 1em;
+      background-color: #111;
     }
-
     .section img {
-      width: 300px;
-      height: auto;
-      border: 3px solid red;
-      margin-right: 30px;
+      width: 40%;
+      margin-right: 1em;
+      border: 2px solid red;
     }
-
     .section p {
-      font-size: 18px;
-      text-shadow: 0 0 2px black;
-      max-width: 600px;
+      flex: 1;
+      font-size: 1.1em;
     }
-
-    .contacto {
-      background-color: black;
-      border-top: 3px solid red;
-      padding: 20px;
+    .final {
       text-align: center;
-      font-size: 18px;
-    }
-
-    .advertencia {
-      background-color: rgba(0, 0, 0, 0.85);
-      color: red;
-      padding: 40px;
-      text-align: justify;
-      font-size: 16px;
-      line-height: 1.6;
+      border-top: 4px solid red;
+      background-color: black;
+      padding: 1em;
+      font-size: 1.2em;
     }
   </style>
 </head>
 <body>
 
-  <!-- Fondo de YouTube -->
-  <div id="youtube-bg">
-    <iframe width="100%" height="100%" 
-      src="https://www.youtube.com/embed/8mcXpBb3VzU?autoplay=1&mute=0&controls=0&showinfo=0&rel=0&loop=1&playlist=8mcXpBb3VzU&modestbranding=1"
-      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-    </iframe>
-  </div>
+  <!-- YouTube Video Background -->
+  <div id="yt-bg"></div>
 
-  <!-- Encabezado -->
-  <header>Servicios Con Consecuencias de muerte</header>
+  <header>
+    Servicios Con Consecuencias de muerte
+  </header>
 
-  <!-- Secciones -->
+  <!-- Sección 1 -->
   <div class="section">
-    <img src="https://images.app.goo.gl/Hw734" alt="Imagen 1">
-    <p>Los objetivos que fallan una advertencia inicial son llevados a un recinto donde se aplica confinamiento sensorial y presión psicológica extrema. El sufrimiento previo es parte esencial del protocolo antes del desenlace final.</p>
+    <img src="https://thumbs.dreamstime.com/b/inquisition-torture-chamber-cage-skulls-illustration-dark-torture-54747121.jpg" alt="Tortura 1">
+    <p>Aplicación de métodos de presión psicológica prolongada. El objetivo es quebrar la voluntad antes del contacto físico.</p>
   </div>
 
+  <!-- Sección 2 -->
   <div class="section">
-    <img src="https://images.app.goo.gl/YYYbg" alt="Imagen 2">
-    <p>En casos específicos, los implicados son expuestos a métodos disuasorios que alteran permanentemente la percepción y resistencia física. Todo se ejecuta con precisión quirúrgica y sin margen de error.</p>
+    <img src="https://c8.alamy.com/compes/bdmn9d/un-grabado-del-siglo-xix-muestra-un-antiguo-metodo-de-tortura-bdmn9d.jpg" alt="Tortura 2">
+    <p>Privación sensorial y manipulación de los sentidos. La víctima pierde la noción del tiempo, lugar y estabilidad mental.</p>
   </div>
 
+  <!-- Sección 3 -->
   <div class="section">
-    <img src="https://images.app.goo.gl/epa7k" alt="Imagen 3">
-    <p>Cuando la situación lo requiere, se recurre a técnicas de interrogatorio forzado en ambientes privados, donde la víctima entiende rápidamente que no hay retorno. Las marcas no siempre son visibles, pero el mensaje queda.</p>
+    <img src="https://ragingswanpress.com/wp-content/uploads/2022/05/Swan-Blood-Magic-Dark.jpg" alt="Tortura 3">
+    <p>Condiciones de encierro extremo. El sujeto experimenta colapso mental ante la imposibilidad de escape y la ausencia de luz.</p>
   </div>
 
+  <!-- Sección 4 -->
   <div class="section">
-    <img src="https://images.app.goo.gl/y13YH" alt="Imagen 4">
-    <p>Las ejecuciones programadas se reservan para quienes cruzan ciertos límites. En estos casos, el silencio es absoluto, y la desaparición se vuelve parte del castigo. La ubicación final nunca es revelada.</p>
+    <img src="https://ih1.redbubble.net/image.4199282644.8266/flat,750x1000,075,f.jpg" alt="Tortura 4">
+    <p>Reducción sistemática del movimiento, intercalada con mensajes auditivos subliminales y ruido blanco constante.</p>
   </div>
 
-  <!-- Contacto -->
-  <div class="contacto">
-    Contactar : +54 9 381 459-9125
+  <footer>
+    Contactar: +54 9 381 459-9125
+  </footer>
+
+  <div class="final">
+    Advertencia: Cualquier acto derivado de los servicios presentados conlleva consecuencias legales, físicas y espirituales irreversibles. No se garantiza retorno alguno ni indemnización por daños o pérdidas. Cada intervención se ejecuta bajo la sombra de la impunidad, en los límites de San Miguel de Tucumán. El que cruza esta línea, acepta el precio.
   </div>
 
-  <!-- Texto largo al final -->
-  <div class="advertencia">
-    Las operaciones realizadas están cuidadosamente planeadas y no dejan evidencia rastreable. Cualquier intento de registrar, delatar o intervenir será respondido de forma proporcional y definitiva. En este medio, las reglas no son negociables. Si se ingresa, se acepta el pacto tácito de lealtad, silencio y consecuencias.  
-    <br><br>
-    El control territorial y logístico cubre San Miguel de Tucumán y zonas adyacentes. Cada movimiento es calculado, y las decisiones se toman con frialdad. No se trata de venganza ni emoción: es cumplimiento de acuerdos y códigos. 
-    <br><br>
-    Si estás leyendo esto, estás más cerca de lo que creés.
-  </div>
-
-  <footer>Canal de Acceso | Nivel: Alto</footer>
+  <!-- YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let ytPlayer;
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('yt-bg', {
+        videoId: '8mcXpBb3VzU',
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          loop: 1,
+          playlist: '8mcXpBb3VzU',
+          mute: 1,
+          modestbranding: 1,
+          showinfo: 0
+        },
+        events: {
+          onReady: () => {
+            document.body.addEventListener('click', () => {
+              ytPlayer.unMute();
+              ytPlayer.playVideo();
+            }, { once: true });
+          }
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
